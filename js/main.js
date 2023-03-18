@@ -366,8 +366,8 @@ function contar_palabras(texto){
     texto = texto.replace(/\:/g,' ');
     texto = texto.replace(/\;/g,' ');
     texto.split(' ').forEach(palabra => {
-    //Ignoramos los strings vacios
-        if (!palabra == ""){
+    //Ignoramos los strings vacios, ademas de los numeros
+        if (!palabra == "" && isNaN(palabra)){
                 //Para normalizar un poco los datos quitamos las mayusculas
                     palabra = palabra.toLowerCase() 
                     if (palabra in palabras) {
@@ -484,7 +484,7 @@ function ascending(list){
 
 function create_cloud(word_cloud,order){
     var canvas = document.getElementById("canvas")
-    let canvas_trans = canvas.getBoundingClientRect().left*.95
+    let canvas_trans_x = canvas.getBoundingClientRect().left*.95
     
     //Eliminamos los posibles valores de calculos anteriores
     while (canvas.firstChild) {
@@ -493,10 +493,21 @@ function create_cloud(word_cloud,order){
     var last_word;
     let new_Height = 0; 
     let current_height = 0;
-
-
+    
+    const sizes  = Object.create(null);
+    let posicion = 0;
     for (let key in word_cloud) {
-        create_word(key,word_cloud[key]*10,key,canvas)
+        if (!(word_cloud[key] in sizes)){
+             sizes[word_cloud[key]] = posicion
+             posicion += 1
+        }
+    }
+     
+    
+    let categories = Object.keys(sizes).length - 1
+    for (let key in word_cloud) {
+        word_size = 60*((categories - sizes[word_cloud[key]])/categories) + 20
+        create_word(key,word_size,key,canvas)
     }
 
     if (order == 'asc'){
@@ -512,11 +523,11 @@ function create_cloud(word_cloud,order){
             // debido a que el canvas fue transladado, getBoundingCLientRect regresa la posión del objeto con el desplazamiento
             // del canvas, por ello es necesario restar está translacción del objeto, para que no haya tanta separación entre las
             // palabras
-            last_x = l_bbox.right - canvas_trans
-            last_y = l_bbox.left - canvas_trans
+            last_x = l_bbox.right - canvas_trans_x
+            last_y = l_bbox.left - canvas_trans_x
 
             
-            current_x = l_bbox.right + bbox.width - canvas_trans;
+            current_x = l_bbox.right + bbox.width - canvas_trans_x;
             if (current_x >= canvas.getBoundingClientRect().width){
                 current_height = new_Height
                 word.setAttributeNS(null,'transform','translate('+ 0 + ',' + current_height +')')
@@ -530,7 +541,7 @@ function create_cloud(word_cloud,order){
         //Es necesario volver a calcular las coordenas
         bbox = word.getBoundingClientRect()
         if (bbox.bottom > new_Height) {
-            new_Height = bbox.bottom 
+            new_Height = bbox.bottom
         }
 
 
