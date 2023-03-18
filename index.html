@@ -1,45 +1,53 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/styles.css">
     <title>Document</title>
 </head>
 <body>
 
-
-    <svg id="canvas" width="900" height="400" viewbox="0 0 900 400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    <div class="flex-canvas">
+    <svg id="canvas">
     </svg>
+    </div>
 
 
-
-    <label for="Seleccion">Seleccione un idioma</label>
-    <select id="idioma">
-        <option value="español">Español</option>
-        <option value="ingles">Inglés</option>
-    </select>
-
-    <label for="Seleccion_idioma">Seleccione el orden</label>
-    <select id="order">
-        <option value="asc">Ascendente</option>
-        <option value="desc">Descendente</option>
-    </select>
-
-    <label >Numero de palabras [10-100]</label>
-
-    <input type="range" id="palabras" min="10" max="100" value="50">
-    <p>Value: <output id="value_palabras"></output></p>
-
-
-    <form  action="#">
-        Ingresa el texto que deseas analizar
-        <br>
-        <textarea rows = "15" cols = "180" name = "description" id="texto_area">
-        </textarea>
-        <br>
-        <button type="button" id="dibujar">Dibujar</button>
-    </form>
+    <div class="flex-container">
+        <div>
+            <label for="Seleccion">Seleccione un idioma</label>
+            <select id="idioma">
+                <option value="español">Español</option>
+                <option value="ingles">Inglés</option>
+            </select>
+       </div>
+       <div>
+        <label for="Seleccion_idioma">Seleccione el orden</label>
+        <select id="order">
+            <option value="asc">Ascendente</option>
+            <option value="desc">Descendente</option>
+        </select>
+       </div>
+    
+       <div>
+            <label >Numero de palabras [0-100]</label>
+            <input type="range" id="palabras" min="0" max="100" value="50">
+            <p>Valor: <output id="value_palabras"></output></p>
+       </div>
+    </div>
+ 
+    <div class="flex-container">
+            <form class="form"  action="#">
+                <p>Ingresa el texto que deseas analizar</p>
+                <br>
+                <textarea class="texto-area" name = "description" id="texto_area">
+                </textarea>
+                <br>
+                <button class="boton-texto" type="button" id="dibujar">Dibujar</button>
+            </form>
+    </div>
     
     <h1> Calculadora de las palabras con más repeticiones en un texto </h1>
     <p> Este algoritmo puede ser de utilidad en el area de Procesamiento del Lenguaje Natural, para intentar resumir un texto

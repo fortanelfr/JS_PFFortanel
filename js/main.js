@@ -417,14 +417,22 @@ function top_n(texto,idioma,numero_palabras,remover=true){
    return resultado
 }
 
+function getDarkColor() {
+    var color = '#';
+    for (var i = 0; i < 6; i++) {
+        color += Math.floor(Math.random() * 10);
+    }
+    return color;
+}
 
 function create_word(text,size,id,canvas,x=0,y=0){
     let word = document.createElementNS("http://www.w3.org/2000/svg","text");
     word.textContent = text;
     word.setAttributeNS(null,'dominant-baseline','hanging')
     word.setAttributeNS(null,'alignment-baseline','baseline')
-    word.setAttributeNS(null,'font-style','italic')
+    word.setAttributeNS(null,'font-style','Impact')
     word.setAttributeNS(null,'font-size',size)
+    word.setAttributeNS(null,'fill',getDarkColor())
     word.setAttributeNS(null,'id',id)
     word.setAttributeNS(null,'x',x)
     word.setAttributeNS(null,'y',y)
@@ -476,6 +484,7 @@ function ascending(list){
 
 function create_cloud(word_cloud,order){
     var canvas = document.getElementById("canvas")
+    let canvas_trans = canvas.getBoundingClientRect().left*.95
     
     //Eliminamos los posibles valores de calculos anteriores
     while (canvas.firstChild) {
@@ -499,12 +508,16 @@ function create_cloud(word_cloud,order){
         var bbox = word.getBoundingClientRect()
         if (last_word != null){
             var l_bbox = last_word.getBoundingClientRect();
-            last_x = l_bbox.right
-            last_y = l_bbox.left
+            // getBoundingCLientRect obtiene la posicion del objeto sobre toda la pagina, no sobre el canvas
+            // debido a que el canvas fue transladado, getBoundingCLientRect regresa la posión del objeto con el desplazamiento
+            // del canvas, por ello es necesario restar está translacción del objeto, para que no haya tanta separación entre las
+            // palabras
+            last_x = l_bbox.right - canvas_trans
+            last_y = l_bbox.left - canvas_trans
 
             
-            current_x = l_bbox.right + bbox.width;
-            if (current_x >= 900){
+            current_x = l_bbox.right + bbox.width - canvas_trans;
+            if (current_x >= canvas.getBoundingClientRect().width){
                 current_height = new_Height
                 word.setAttributeNS(null,'transform','translate('+ 0 + ',' + current_height +')')
         
@@ -585,6 +598,11 @@ num_palabras.addEventListener("click",drawCloud)
 
 let order_palabras = document.getElementById("order");
 order_palabras.addEventListener("click",drawCloud)
+
+let can = document.getElementById("canvas");
+console.log(can.getBoundingClientRect())
+
+
 
 
 
