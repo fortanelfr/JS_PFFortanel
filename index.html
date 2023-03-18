@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+
+    <svg id="canvas" width="900" height="400" viewbox="0 0 900 400" version="1.1" xmlns="http://www.w3.org/2000/svg">
+    </svg>
+
+
+
+    <label for="Seleccion">Seleccione un idioma</label>
+    <select id="idioma">
+        <option value="español">Español</option>
+        <option value="ingles">Inglés</option>
+    </select>
+
+    <label for="Seleccion_idioma">Seleccione el orden</label>
+    <select id="order">
+        <option value="asc">Ascendente</option>
+        <option value="desc">Descendente</option>
+    </select>
+
+    <label >Numero de palabras [10-100]</label>
+
+    <input type="range" id="palabras" min="10" max="100" value="50">
+    <p>Value: <output id="value_palabras"></output></p>
+
+
+    <form  action="#">
+        Ingresa el texto que deseas analizar
+        <br>
+        <textarea rows = "15" cols = "180" name = "description" id="texto_area">
+        </textarea>
+        <br>
+        <button type="button" id="dibujar">Dibujar</button>
+    </form>
+    
+    <h1> Calculadora de las palabras con más repeticiones en un texto </h1>
+    <p> Este algoritmo puede ser de utilidad en el area de Procesamiento del Lenguaje Natural, para intentar resumir un texto
+        por medio de una grafica cloud word.
+        Es importante filtar los palabras vacias(stopwords) las cuales carecen de significado, como artículos, pronombres, preposiciones, etc.</p>
+    <p> Tambien es impoportante eliminar caracteres especiales como saltos de linea, puntos y comas.</p>
+
+    <p>Esta calculadora puede procesar texto en ingles o español. </p>
+    <p> El texto utilizado en las pruebas viene de las paginas </p>
+    <p><a href="https://distintaslatitudes.net/archivo/el-rock-en-latinoamerica-una-posible-nota-introductoria">español</a></p>
+    <p><a href="https://www.bbc.com/news/world-middle-east-64618187">ingles</a></p>
+  
+<script src=js/main.js></script>
+
+</body>
+</html>
