@@ -17,7 +17,7 @@
 
     <div class="flex-container">
         <div>
-            <label for="Seleccion">Seleccione un idioma</label>
+            <label for="Seleccion">Seleccione el idioma:</label>
             <select id="idioma">
                 <option value="español">Español</option>
                 <option value="ingles">Inglés</option>
@@ -33,7 +33,7 @@
     
        <div>
             <label >Numero de palabras [0-100]</label>
-            <input type="range" id="palabras" min="0" max="100" value="50">
+            <input type="range" id="npalabras" min="0" max="100" value="50">
             <p>Valor: <output id="value_palabras"></output></p>
        </div>
     </div>
@@ -48,19 +48,11 @@
                 <button class="boton-texto" type="button" id="dibujar">Dibujar</button>
             </form>
     </div>
-    
-    <h1> Calculadora de las palabras con más repeticiones en un texto </h1>
-    <p> Este algoritmo puede ser de utilidad en el area de Procesamiento del Lenguaje Natural, para intentar resumir un texto
-        por medio de una grafica cloud word.
-        Es importante filtar los palabras vacias(stopwords) las cuales carecen de significado, como artículos, pronombres, preposiciones, etc.</p>
-    <p> Tambien es impoportante eliminar caracteres especiales como saltos de linea, puntos y comas.</p>
 
-    <p>Esta calculadora puede procesar texto en ingles o español. </p>
-    <p> El texto utilizado en las pruebas viene de las paginas </p>
-    <p><a href="https://distintaslatitudes.net/archivo/el-rock-en-latinoamerica-una-posible-nota-introductoria">español</a></p>
-    <p><a href="https://www.bbc.com/news/world-middle-east-64618187">ingles</a></p>
-  
+
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src=js/main.js></script>
+
 
 </body>
 </html>

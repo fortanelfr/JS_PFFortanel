@@ -13,7 +13,7 @@ https://www.bbc.com/news/world-middle-east-64618187
 
 //La lista de stopwords se podria leer de un archivo txt
 const stopwords = {
-     ingles : ["a","about","above","after","again","against","all","am","an","and","any","are","aren't",
+     ingles : ["a","about","above","after","again","against","all","am","an","and","any","are","aren't","get","sometimes",
 "as",
 "at",
 "be",
@@ -175,7 +175,7 @@ const stopwords = {
 "yours",
 "yourself",
                "yourselves"],
-     español: ["un","a","del","hemos","más","que","se","y","de","en","un","al","no",
+     español: ["un","a","del","hemos","más","que","se","y","de","en","un","al","no","o","qué","así",
 "una",
 "unas",
 "unos",
@@ -554,6 +554,7 @@ function create_cloud(word_cloud,order){
 
 
 
+
 let text_area = document.getElementById("texto_area")
 sessionStorage.setItem('texto',prueba);
 text_area.value = sessionStorage.getItem('texto')
@@ -563,36 +564,32 @@ function drawCloud(){
     let text_cloud = sessionStorage.getItem('texto')
 
     let idioma = document.getElementById("idioma");
-    let num_palabras = document.getElementById("palabras");
+    let num_palabras = document.getElementById("npalabras");
     let order_palabras = document.getElementById("order");
 
     word_cloud = top_n(text_cloud,idioma.value,num_palabras.value);
     create_cloud(word_cloud,order_palabras.value);
-    
-    /*
-    function ascending(list){
-        keys = Object.keys(list).sort(function(a,b){return list[a]-list[b]})
-
-        const result = Object.create(null);
-                keys.forEach(word => {
-                    result[word] = list[word]
-        });
-        return result
-    }
-
-    //word_cloud= ascending(word_cloud)
-
-    for (let key in word_cloud) {
-    console.log(key,word_cloud[key] )
-    }
-    */
-
 }
+
+
+swal({
+    title:"Calculadora de las palabras con más repeticiones en un texto.",
+    text: "Este simulador puede ser de utilidad para obtener los conceptos más importantes de un texto.\n\
+           Las palabras con mayor repeticiones seran dibujadas en pantalla de forma ordena, donde el tamaño de la palabra está relacionado con numero de repeticiones en el texto.\n \
+           El simulador se divide en tres tareas, cada una de las tareas cuenta con un parametro que el usuario puede modificar.\n\
+           1.- La eliminación de palabras y/o caracteres que no aportan demasiada información al texto: El usuario podra seleccionar el idioma en el que se encuentra el texto,\
+               ya que dependiendo del idioma, seran las palabras que se deben ser removidas del conteo, estás palabras son conocidas como stopwords.\n\
+           2.- Obtener las n palabras más comunes: El usuario podra seleccionar cuantas palabras contar.\n \
+           3.- Dibujar las palabras en la pantalla de manera ordenada: El usuario podra seleccionar el orden de dibujo, ascendente o descendente."
+});
+
+
+
 
 drawCloud()
 
 const value = document.getElementById("value_palabras")
-const input = document.getElementById("palabras")
+const input = document.getElementById("npalabras")
 value.textContent = input.value
 input.addEventListener("input", (event) => {
   value.textContent = event.target.value
@@ -604,14 +601,12 @@ boton.addEventListener("click",drawCloud)
 let idioma = document.getElementById("idioma");
 idioma.addEventListener("click",drawCloud)
 
-let num_palabras = document.getElementById("palabras");
+let num_palabras = document.getElementById("npalabras");
 num_palabras.addEventListener("click",drawCloud)
 
 let order_palabras = document.getElementById("order");
 order_palabras.addEventListener("click",drawCloud)
 
-let can = document.getElementById("canvas");
-console.log(can.getBoundingClientRect())
 
 
 
